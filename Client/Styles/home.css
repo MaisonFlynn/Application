@@ -53,5 +53,12 @@
 }
 
 #coins {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.profile button {
+    margin: 10px;
+    width: 90%;
 }
