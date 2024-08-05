@@ -7,8 +7,8 @@
 
 1. **Clone Repository**
     ```sh
-    git clone https://github.com/username/repository.git
-    cd repository
+    git clone https://github.com/Username/Repository.git
+    cd Repository
     ```
 
 2. **Install Dependencies**
@@ -18,9 +18,9 @@
 
 3. **Create `.env` File IN Root w/ Variable(s)**
     ```plaintext
-    CONNECTION=MongoDB Connection String
-    USER=Email
-    PASS=Email's Password
-    KEY=JWT Secret Key
-    PORT=Preferred Port, Default 3000
+    CONNECTION = MongoDB Connection String
+    USER = Email
+    PASS = Email's Password
+    KEY = JWT Secret Key
+    PORT = Preferred Port, Default 3000
     ```
