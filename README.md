@@ -3,7 +3,7 @@
 1. **Clone Repository**
     ```sh
     git clone https://github.com/Username/Repository.git
-    cd Repository
+    cd Repository/Server
     ```
 
 2. **Install Dependencies**
