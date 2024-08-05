@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="Styles/style.css">
+    <link rel="stylesheet" href="Styles/auth.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav">
+        Application
+    </div>
+
+    <div class="main">
+        <!-- Advertisement -->
+        <div class="ad">
+            Advertisement
+        </div>
+        
+        <div class="container" id="container">
+            <!-- Authentication -->
+            <div class="auth" id="auth">
+                <!-- Login -->
+                <div class="login" id="login">
+                    <form class="loginForm" onsubmit="login(event)" autocomplete="off" novalidate>
+                        <h1>Login</h1>
+                        <input type="email" id="loginUsername" placeholder="Username">
+                        <input type="password" id="loginPassword" placeholder="Password">
+                        <div class="checkbox">
+                            <input type="checkbox" id="checkbox" onclick="togglePassword('loginPassword')">
+                            <label for="checkbox">Show Password</label>
+                        </div>
+                        <button type="submit">Login</button>
+                        <p>NEW? <span class="toggle" onclick="showRegisterForm()">Register</span></p>
+                        <span id="loginError" style="color:red;"></span>
+                        <span id="loginSuccess" style="color:green;"></span>
+                    </form>
+                </div>
+                
+                <!-- Register -->
+                <div class="register" id="register">
+                    <form class="registerForm" onsubmit="register(event)" autocomplete="off" novalidate>
+                        <h1>Register</h1>
+                        <input type="text" id="registerUsername" placeholder="Username">
+                        <input type="email" id="registerEmail" placeholder="Email">
+                        <input type="password" id="registerPassword" placeholder="Password">
+                        <div class="checkbox">
+                            <input type="checkbox" id="checkbox" onclick="togglePassword('registerPassword')">
+                            <label for="checkbox">Show Password</label>
+                        </div>
+                        <button type="submit">Register</button>
+                        <p>OLD? <span class="toggle" onclick="showLoginForm()">Login</span></p>
+                        <span id="usernameError" style="color:red;"></span>
+                        <span id="emailError" style="color:red;"></span>
+                        <span id="passwordError" style="color:red;"></span>
+                        <span id="registerSuccess" style="color:green;"></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advertisement -->
+        <div class="ad">
+            Advertisement
+        </div>
+    </div>
+
+    <!-- Script(s) -->
+    <script src="Scripts/auth.js"></script>
+</body>
+</html>
