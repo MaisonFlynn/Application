@@ -24,10 +24,3 @@
     KEY=JWT Secret Key
     PORT=Preferred Port, Default 3000
     ```
-
-## Running Application
-
-### Development
-w/ Nodemon
-```sh
-npm run dev
