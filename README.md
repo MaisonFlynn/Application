@@ -11,7 +11,7 @@
     npm install
     ```
 
-3. **Create `.env` File IN Root w/ Variable(s)**
+3. **Create `.env` File IN Server w/ Variable(s)**
     ```plaintext
     CONNECTION = MongoDB Connection String
     USER = Email
