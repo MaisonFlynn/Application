@@ -2,8 +2,8 @@
 
 1. **Clone Repository**
     ```sh
-    git clone https://github.com/Username/Repository.git
-    cd Repository/Server
+    git clone https://github.com/MaisonFlynn/Application.git
+    cd Application/Server
     ```
 
 2. **Install Dependencies**
