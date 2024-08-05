@@ -13,3 +13,6 @@ PASS = Email's Password
 KEY = JWT Secret Key
 PORT = Preferred Port, Default 3000
 ```
+```sh
+npm run start
+```
