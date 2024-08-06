@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
     const sessionToken = localStorage.getItem('sessionToken');
     if (!token || !sessionToken) {
-        window.location.href = '../index.html';
+        window.location.href = '../../index.html';
     } else {
         // Verify Session Token w/ Server
         try {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const data = await response.json();
             if (!response.ok) {
                 console.error('Token Verification Error:', data.error);
-                window.location.href = '../index.html';
+                window.location.href = '../../index.html';
             } else {
                 // Fetch & Display User Detail(s)
                 const userResponse = await fetch('/auth/profile', {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         } catch (error) {
             console.error('Token Verification Error:', error);
-            window.location.href = '../index.html';
+            window.location.href = '../../index.html';
         }
     }
 });
@@ -71,7 +71,7 @@ async function logout() {
             if (response.ok) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('sessionToken');
-                window.location.href = '../index.html';
+                window.location.href = '../../index.html';
             } else {
                 console.error('Logout Error');
             }
