@@ -48,6 +48,8 @@
     background: white;
     min-width: 930px;
     min-height: 600px;
+    max-width: 930px;
+    max-height: 600px;
     margin: 0 30px;
     position: relative;
     border-radius: 15px;

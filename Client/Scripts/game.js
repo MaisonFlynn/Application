@@ -115,15 +115,10 @@ function profile() {
 
 function shop() {
     navigating = true;
-    window.location.href = 'shop.html';
+    window.location.href = '../shop.html';
 }
 
 function home() {
     navigating = true;
-    window.location.href = 'home.html';
-}
-
-function game(name) {
-    navigating = true;
-    window.location.href = `Games/${name}.html`;
+    window.location.href = '../home.html';
 }
