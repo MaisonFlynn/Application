@@ -6,6 +6,7 @@
     <title>Coin Clicker</title>
     <link rel="stylesheet" href="../../Styles/style.css">
     <link rel="stylesheet" href="../../Styles/home.css">
+    <link rel="stylesheet" href="../../Styles/coin_clicker.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -38,7 +39,18 @@
         </div>
         
         <div class="container" id="container">
-            
+            <div class="game">
+                <h1><span id="count">0</span> 🪙's</h1>
+                <h2><span id="cps">0</span> /s</h2>
+                <div class="coin">
+                    <img id="coin" src="../../Images/Coin.png" alt="Coin">
+                </div>
+            </div>
+            <div class="shop">
+                <h2>Shop</h2>
+                <button>Multiplier</button>
+                <button>Auto Clicker</button>
+            </div>
         </div>
 
         <!-- Advertisement -->
@@ -48,6 +60,7 @@
     </div>
 
     <!-- Script(s) -->
-     <script src="../../Scripts/game.js"></script>
+    <script src="../../Scripts/game.js"></script>
+    <script src="../../Scripts/coin_clicker.js"></script>
 </body>
 </html>
