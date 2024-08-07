@@ -29,12 +29,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (userResponse.ok) {
                     document.getElementById('username').textContent = userData.user.username;
                     document.getElementById('coins').textContent = `🪙 ${userData.user.coins}`;
-
-                    // Apply Theme
-                    const theme = localStorage.getItem('theme');
-                    if (theme) {
-                        document.body.style.backgroundColor = theme;
-                    }
                 } else {
                     console.error('Profile Error', userData.error);
                 }
