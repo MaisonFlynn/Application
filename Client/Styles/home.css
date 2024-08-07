@@ -68,7 +68,7 @@
     flex-wrap: wrap;
     gap: 30px;
     justify-content: center;
-    padding: 30px;
+    padding: 35px;
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer */
