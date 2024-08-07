@@ -115,8 +115,8 @@ async function login(event) {
     document.getElementById('loginError').textContent = '';
     document.getElementById('loginSuccess').textContent = '';
 
-    const username  = document.getElementById('loginUsername').value;
-    const password = document.getElementById('loginPassword').value.trim();
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
 
     // Sanitize Input(s)
     if (!sanitize(username) || !sanitize(password)) {
@@ -132,9 +132,10 @@ async function login(event) {
         });
         const data = await response.json();
         if (response.ok) {
-            // Save Token(s)
+            // Save Token(s) & Username
             localStorage.setItem('token', data.token);
             localStorage.setItem('sessionToken', data.sessionToken);
+            localStorage.setItem('username', username);
             document.getElementById('loginSuccess').textContent = 'Logging IN';
             window.location.href = '/Pages/home.html';
         } else if (response.status === 400 && data.error === 'User Logged IN') {

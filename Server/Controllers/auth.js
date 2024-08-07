@@ -194,4 +194,4 @@ const profile = async (req, res) => {
     }
 };
 
-module.exports = { register, verifyEmail, login, logout, checkUserExists, verifyToken, profile  };
+module.exports = { register, verifyEmail, login, logout, checkUserExists, verifyToken, profile };

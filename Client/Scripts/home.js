@@ -71,6 +71,7 @@ async function logout() {
             if (response.ok) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('sessionToken');
+                localStorage.removeItem('username');
                 window.location.href = '../index.html';
             } else {
                 console.error('Logout Error');

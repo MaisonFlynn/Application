@@ -40,9 +40,11 @@ app.use(express.static(path.join(__dirname, '../Client')));
 
 // Import Route(s)
 const auth = require('./Routes/auth');
+const shop = require('./Routes/shop');
 
 // Use Route(s)
 app.use('/auth', auth);
+app.use('/shop', shop);
 
 // Load Schedule
 require('./Utils/schedule');

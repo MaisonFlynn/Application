@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
     verificationToken: { type: String },
     registered: { type: Date, default: Date.now },
     sessionToken: { type: String, default: null },
-    session: { type: Date, default: null }
+    session: { type: Date, default: null },
+    theme: { type: String, default: '#FFFFFF' }
 }, { versionKey: 'version' });
 
 userSchema.pre('save', async function(next) {
