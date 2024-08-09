@@ -125,7 +125,7 @@ const login = async (req, res) => {
         await user.save();
 
         // Generate JWT Token (1 DAY)
-        const token = jwt.sign({ userId: user._id }, process.env.KEY, { expiresIn: '1d' });
+        const token = jwt.sign({ userId: user._id }, process.env.SECRET, { expiresIn: '1d' });
 
         // Send Token(s)
         res.json({ token, sessionToken: user.sessionToken });
@@ -184,7 +184,7 @@ const verifyToken = async (req, res) => {
 const profile = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     try {
-        const decoded = jwt.verify(token, process.env.KEY);
+        const decoded = jwt.verify(token, process.env.SECRET);
         const user = await User.findById(decoded.userId).select('username coins');
         if (!user) return res.status(404).json({ error: 'User NOT Found' });
         res.status(200).json({ user });
