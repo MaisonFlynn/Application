@@ -11,6 +11,6 @@ touch .env
 CONNECTION = MongoDB Connection String
 KEY = JWT Secret Key
 USER = Gmail Address
-PASS = Gmail Password
+PASS = Gmail Password || App Password
 PORT = Default 3000
 ```
