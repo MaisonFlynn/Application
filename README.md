@@ -1,8 +1,5 @@
 ```bash
-git clone https://github.com/MaisonFlynn/Application.git
-cd Application/Server
-npm install
-touch .env
+git clone https://github.com/MaisonFlynn/Application.git && cd Application/Server && npm i && touch .env
 ```
 
 `.env`
