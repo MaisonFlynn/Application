@@ -33,7 +33,9 @@ mongoose.connect(process.env.CONNECT)
             const word = await Wordle.findOne({ date: today });
 
             if (word) {
-                console.log(`Word O' THE Day IS "${word.word}"`);
+                const chopped = word.word;
+                const capped = chopped.charAt(0).toUpperCase() + chopped.slice(1);
+                console.log(`Word O' THE Day IS "${capped}"`);
             } else {
                 console.log('NO Word Today (╥﹏╥)');
             }
