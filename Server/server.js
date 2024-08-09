@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
 const User = require('./Models/User');
+const Wordle = require('./Models/Wordle');
 
 dotenv.config();
 
@@ -25,6 +26,20 @@ mongoose.connect(process.env.CONNECT)
         } catch (error) {
             console.error('Nullification Error', error);
         }
+
+        // Word O' THE Day
+        try {
+            const today = new Date().setHours(0, 0, 0, 0);
+            const word = await Wordle.findOne({ date: today });
+
+            if (word) {
+                console.log(`Word O' THE Day IS "${word.word}"`);
+            } else {
+                console.log('NO Word Today (╥﹏╥)');
+            }
+        } catch (error) {
+            console.error('Wordle Hurdle XD', error);
+        }
     })
     .catch((err) => {
         console.error('MongoDB Disconnected, Error:', err);
@@ -41,10 +56,12 @@ app.use(express.static(path.join(__dirname, '../Client')));
 // Import Route(s)
 const auth = require('./Routes/auth');
 const shop = require('./Routes/shop');
+const wordle = require('./Routes/wordle');
 
 // Use Route(s)
 app.use('/auth', auth);
 app.use('/shop', shop);
+app.use('/wordle', wordle);
 
 // Load Schedule
 require('./Utils/schedule');
