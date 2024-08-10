@@ -8,9 +8,9 @@ touch .env
 `.env`
 
 ```
-CONNECT = MongoDB Connection String
-SECRET = JWT Secret Key
-USER = Gmail Address
-PASS = Gmail Password || App Password
-PORT = Default 3000
+CONNECT= MongoDB Connection String
+SECRET= JWT Secret Key
+USER= Gmail Address
+PASS= Gmail Password || App Password
+PORT= Default 3000
 ```
