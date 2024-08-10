@@ -127,7 +127,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         result.forEach((result, i) => {
             cells[i].textContent = value[i];
-            cells[i].classList.add(result.status);
+            if (result.status === 'correct') {
+                cells[i].classList.add('correct');
+            } else if (result.status === 'present') {
+                cells[i].classList.add('present');
+            } else if (result.status === 'absent') {
+                cells[i].classList.add('absent');
+            }
         });
     }
 

@@ -30,13 +30,18 @@ mongoose.connect(process.env.CONNECT)
         // Word O' THE Day
         try {
             const today = new Date().setHours(0, 0, 0, 0);
-            const word = await Wordle.findOne({ date: today });
+            let word = await Wordle.findOne({ date: today });
 
             if (!word) {
                 // NO Word, NO Worries
                 const rando = nab();
                 const crisp = new Wordle({ word: rando, date: today });
                 await crisp.save();
+                word = crisp;
+
+                // Reset Wordle Related User Field(s)
+                await User.updateMany({}, { $set: { guesses: [], attempts: null, solved: null, played: null } });
+
                 const chop = word.word;
                 const cap = chop.charAt(0).toUpperCase() + chop.slice(1);
                 console.log(`Word O' THE Day IS "${cap}"`);
