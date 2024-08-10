@@ -29,10 +29,8 @@ exports.gander = async (req, res) => {
             return res.status(404).json({ error: 'NO Word Today (╥﹏╥)' });
         }
 
-        if (user.played && user.played.getTime() === today && user.solved) {
-            return res.status(403).json({ error: 'Solved!' });
-        } else if (user.played && user.played.getTime() === today) {
-            return res.status(403).json({ error: 'Played!' });
+        if (user.played && user.played.getTime() === today && (user.solved || user.attempts === 0)) {
+            return res.status(403).json({ error: user.solved ? 'Solved!' : 'Played!' });
         }
 
         const guess = req.body.guess.toLowerCase();
@@ -57,12 +55,14 @@ exports.gander = async (req, res) => {
         }
 
         // Update User's Played & Solved
-        user.played = today;
+        user.attempts--;
 
         if (yessir) {
             user.coins += 5; // Increment User's Coin(s)
             user.solved = true;
-        } else {
+            user.played = today;
+        } else if (user.attempts === 0) {
+            user.played = today; 
             user.solved = false;
         }
 
