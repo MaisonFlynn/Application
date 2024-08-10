@@ -136,7 +136,7 @@ const login = async (req, res) => {
 };
 
 // Check IF User Exists (Client)
-const checkUserExists = async (req, res) => {
+const existence = async (req, res) => {
     const { email, username } = req.body;
     try {
         const user = await User.findOne({ $or: [{ email }, { username }] });
@@ -194,4 +194,4 @@ const profile = async (req, res) => {
     }
 };
 
-module.exports = { register, verifyEmail, login, logout, checkUserExists, verifyToken, profile };
+module.exports = { register, verifyEmail, login, logout, existence, verifyToken, profile };

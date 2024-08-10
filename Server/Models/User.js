@@ -11,7 +11,9 @@ const userSchema = new mongoose.Schema({
     registered: { type: Date, default: Date.now },
     sessionToken: { type: String, default: null },
     session: { type: Date, default: null },
-    theme: { type: String, default: '#FFFFFF' }
+    theme: { type: String, default: '#FFFFFF' },
+    played: { type: Date, default: null },
+    solved: { type: Boolean, default: false }
 }, { versionKey: 'version' });
 
 userSchema.pre('save', async function(next) {
