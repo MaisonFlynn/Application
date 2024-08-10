@@ -35,17 +35,17 @@
 }
 
 .correct {
-    background-color: #4CAF50;
+    background-color: #81C784;
     color: #FFFFFF;
 }
 
 .present {
-    background-color: #FFC107;
+    background-color: #FFD54F;
     color: #FFFFFF;
 }
 
 .abscent {
-    background-color: #9E9E9E;
+    background-color: #BDBDBD;
     color: #FFFFFF;
 }
 
