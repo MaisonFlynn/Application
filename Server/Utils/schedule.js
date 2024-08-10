@@ -38,12 +38,13 @@ cron.schedule('0 0 * * *', async () => {
 cron.schedule('0 0 * * *', async () => {
     console.log("Plonkin' NEW Word O' THE Day");
     const today = new Date().setHours(0, 0, 0, 0);
-    let word = await Wordle.findOne({ date: today });
-
-    if (!word) {
-        const spanking = new Wordle({ word: nab(), date: today });
-        await spanking.save();
-        console.log(`Word O' THE Day IS "${spanking.word}"`);
+    try {
+        const rando = nab();
+        const crisp = new Wordle({ word: rando, date: today });
+        await crisp.save();
+        console.log(`New Word of the Day is "${crisp}"`);
+    } catch (error) {
+        console.error('Wordle Hurdle XD', error);
     }
 });
 
