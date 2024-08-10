@@ -43,6 +43,13 @@ cron.schedule('0 0 * * *', async () => {
         const crisp = new Wordle({ word: rando, date: today });
         await crisp.save();
         console.log(`New Word of the Day is "${crisp}"`);
+
+        // Clear User's Wordle Data
+        const result = await User.updateMany(
+            {},
+            { $set: { guesses: [], attempts: null, solved: null, played: null } }
+        );
+        console.log(`Wordled ${result.nModified} User(s)`);
     } catch (error) {
         console.error('Wordle Hurdle XD', error);
     }

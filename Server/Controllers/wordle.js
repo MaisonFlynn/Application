@@ -18,6 +18,38 @@ exports.snag = async (req, res) => {
     }
 };
 
+// Fetch User's Guesses FOR Today
+exports.bag = async (req, res) => {
+    try {
+        const user = req.user;
+        const today = new Date().setHours(0, 0, 0, 0);
+        const word = await Wordle.findOne({ date: today });
+
+        if (!word) {
+            return res.status(404).json({ error: 'NO Word Today (╥﹏╥)' });
+        }
+
+        let guesstimates = user.guesses.map(guess => {
+            let result = [];
+            for (let i = 0; i < 5; i++) {
+                if (guess[i] === word.word[i]) {
+                    result.push({ letter: guess[i], status: 'correct' });
+                } else if (word.word.includes(guess[i])) {
+                    result.push({ letter: guess[i], status: 'present' });
+                } else {
+                    result.push({ letter: guess[i], status: 'absent' });
+                }
+            }
+            return { guess, result };
+        });
+
+        return res.json({ guesses: guesstimates });
+    } catch (err) {
+        console.error('Guess What THE Error IS', err);
+        res.status(500).json({ error: 'Server Error' });
+    }
+};
+
 // Gander UPON Guess
 exports.gander = async (req, res) => {
     try {
@@ -55,6 +87,7 @@ exports.gander = async (req, res) => {
         }
 
         // Update User's Played & Solved
+        user.guesses.push(guess);
         user.attempts--;
 
         if (yessir) {
@@ -68,7 +101,7 @@ exports.gander = async (req, res) => {
 
         await user.save();
 
-        res.json({ result });
+        res.json({ result, guesses: user.guesses });
 
     } catch (err) {
         res.status(500).json({ error: 'Server Error' });

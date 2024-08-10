@@ -31,22 +31,22 @@
     font-size: 32px;
     text-transform: uppercase;
     border-radius: 5px;
-    background-color: white;
+    background-color: #FFFFFF;
 }
 
 .correct {
-    background-color: green;
-    color: white;
+    background-color: #4CAF50;
+    color: #FFFFFF;
 }
 
 .present {
-    background-color: orange;
-    color: white;
+    background-color: #FFC107;
+    color: #FFFFFF;
 }
 
 .abscent {
-    background-color: lightgray;
-    color: white;
+    background-color: #9E9E9E;
+    color: #FFFFFF;
 }
 
 #guess {

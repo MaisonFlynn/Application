@@ -14,6 +14,8 @@ const userSchema = new mongoose.Schema({
     resetToken: { type: String, default: null },
     resetExpiry: { type: Date, default: null },
     theme: { type: String, default: '#FFFFFF' },
+    guesses: [{ type: String, default: [] }],
+    attempts: { type: Number, default: 6 },
     played: { type: Date, default: null },
     solved: { type: Boolean, default: false }
 }, { versionKey: 'version' });

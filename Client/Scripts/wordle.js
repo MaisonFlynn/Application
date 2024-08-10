@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const board = document.getElementById('board');
     const guess = document.getElementById('guess');
     const submit = document.getElementById('submit');
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let count = 0; // Count Guess
     const cap = 6; // 6 Guess
 
-    // Draw the empty board with 6 rows and 5 columns
+    // Draw Board
     function draw() {
         for (let i = 0; i < cap; i++) {
             const row = document.createElement('div');
@@ -22,6 +22,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     draw(); 
+
+    try {
+        const sessionToken = localStorage.getItem('sessionToken');
+        if (!sessionToken) {
+            message.textContent = 'NO Session Token';
+            return;
+        }
+
+        const response = await fetch('/wordle/guesses', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'sessionToken': sessionToken
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            message.textContent = data.error;
+            return;
+        }
+
+        // IF Guesses, Draw 'EM
+        if (data.guesses && data.guesses.length > 0) {
+            data.guesses.forEach(({ guess, result }, i) => {
+                facelift(guess, result, i);
+                count++;
+            });
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+        message.textContent = 'Wordle Hurdle XD';
+    }
 
     submit.addEventListener('click', guesstimate);
     guess.addEventListener('keypress', (e) => {
