@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema({
     registered: { type: Date, default: Date.now },
     sessionToken: { type: String, default: null },
     session: { type: Date, default: null },
+    resetToken: { type: String, default: null },
+    resetExpiry: { type: Date, default: null },
     theme: { type: String, default: '#FFFFFF' },
     played: { type: Date, default: null },
     solved: { type: Boolean, default: false }

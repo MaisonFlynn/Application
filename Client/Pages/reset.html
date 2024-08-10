@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset</title>
+    <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="../Styles/auth.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav">
+        Application
+    </div>
+
+    <div class="main">
+        <!-- Advertisement -->
+        <div class="ad">
+            Advertisement
+        </div>
+        
+        <div class="container" id="container">
+            <form id="reset" autocomplete="off" novalidate>
+                <h1>Reset</h1>
+                <input type="password" id="newPassword" placeholder="NEW Password">
+                <div class="checkbox">
+                    <input type="checkbox" id="checkbox" onclick="togglePassword('newPassword')">
+                    <label for="checkbox">Show Password</label>
+                </div>
+                <button type="submit">Reset</button>
+                <span id="whoopsies" onclick="index()">Whoopsies?</span>
+                <span id="message"></span>
+            </form>
+        </div>
+
+        <!-- Advertisement -->
+        <div class="ad">
+            Advertisement
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        function togglePassword(inputID) {
+            const input = document.getElementById(inputID);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function index() {
+            window.location.href = '../index.html';
+        }
+        
+        // Validation Functions
+        function sanitize(input) {
+            const regex = /^[a-zA-Z0-9\s@.]*$/;
+            return regex.test(input);
+        }
+
+        function validatePassword(password) {
+            const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            return regex.test(password);
+        }
+
+        document.getElementById('reset').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+            const newPassword = document.getElementById('newPassword').value;
+
+            if (!validatePassword(newPassword) || !sanitize(newPassword)) {
+                document.getElementById('message').textContent = 'Invalid Password';
+                return;
+            }
+
+            try {
+                const response = await fetch('/auth/reset', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token, newPassword })
+                });
+
+                const data = await response.json();
+                document.getElementById('message').textContent = data.message || data.error;
+
+                if (response.ok) {
+                    document.getElementById('message').textContent = 'Success';
+                    window.location.href = '../index.html';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('message').textContent = 'Error';
+            }
+        });
+    </script>
+</body>
+</html>

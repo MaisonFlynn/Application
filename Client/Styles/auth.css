@@ -67,3 +67,20 @@ form {
     text-decoration: underline;
     color: blue;
 }
+
+#alzheimers {
+    margin-left: 137.5px;
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
+
+#forgot, #reset {
+    margin: 0 auto;
+}
+
+#whoopsies {
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}

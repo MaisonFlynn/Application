@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot</title>
+    <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="../Styles/auth.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav">
+        Application
+    </div>
+
+    <div class="main">
+        <!-- Advertisement -->
+        <div class="ad">
+            Advertisement
+        </div>
+        
+        <div class="container" id="container">
+            <form id="forgot" autocomplete="off" novalidate>
+                <h1>Forgot</h1>
+                <input type="email" id="email" placeholder="Email">
+                <button type="submit">Reset</button>
+                <span id="whoopsies" onclick="index()">Whoopsies?</span>
+                <span id="message"></span>
+            </form>
+        </div>
+
+        <!-- Advertisement -->
+        <div class="ad">
+            Advertisement
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+        function index() {
+            window.location.href = '../index.html';
+        }
+        
+        // Validation(s)
+        function sanitize(input) {
+            const regex = /^[a-zA-Z0-9\s@.]*$/;
+            return regex.test(input);
+        }
+
+        function validateEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(String(email).toLowerCase());
+        }
+
+        document.getElementById('forgot').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+
+            if (!validateEmail(email) || !sanitize(email)) {
+                document.getElementById('message').textContent = 'Invalid Email';
+                return;
+            }
+
+            try {
+                const response = await fetch('/auth/forgot', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+        
+                const data = await response.json();
+                document.getElementById('message').textContent = data.message || data.error;
+
+                // Clear Input IF Successful
+                if (response.ok) {
+                    document.getElementById('email').value = '';
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+        </script>
+</body>
+</html>

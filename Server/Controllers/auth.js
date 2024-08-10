@@ -31,11 +31,14 @@ const register = async (req, res) => {
         // Generate Verification Token
         const token = crypto.randomBytes(32).toString('hex');
 
+        // Hash Password BEFORE Saving User
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         // Create & Save User w/ Verification Token
         const user = new User({
             username,
             email,
-            password,
+            password: hashedPassword,
             verificationToken: token,
             registered: new Date()
         });
@@ -98,10 +101,14 @@ const verifyEmail = async (req, res) => {
 // Login User
 const login = async (req, res) => {
     const { username, password } = req.body;
+
     try {
-        // Find User BY Email
+        // Find User BY Username
         const user = await User.findOne({ username });
-        if (!user) return res.status(404).json({ error: 'User NOT Found' });
+
+        if (!user) {
+            return res.status(404).json({ error: 'User NOT Found' });
+        }
 
         // Check IF User IS Verified
         console.log('Verified?', user.verified); // Debug
@@ -112,7 +119,9 @@ const login = async (req, res) => {
         // Validate Password
         const match = await bcrypt.compare(password, user.password);
         console.log('Password(s) Match?', match); // Debug
-        if (!match) return res.status(401).json({ error: 'Invalid Credentials' });
+        if (!match) {
+            return res.status(401).json({ error: 'Invalid Credential(s)' });
+        }
 
         // Check FOR Existing Session Token
         if (user.sessionToken) {
@@ -194,4 +203,66 @@ const profile = async (req, res) => {
     }
 };
 
-module.exports = { register, verifyEmail, login, logout, existence, verifyToken, profile };
+// Forgot Password
+const forgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ error: 'Email NOT Found' });
+        }
+
+        // Generate Reset Token
+        const resetToken = crypto.randomBytes(32).toString('hex');
+        const resetExpiry = Date.now() + 3600000; // 1 Hour
+
+        // Update User w/ Reset Token & Expiry
+        user.resetToken = resetToken;
+        user.resetExpiry = resetExpiry;
+        await user.save();
+
+        // Send Reset Password Email
+        const resetLink = `http://localhost:3000/Pages/reset.html?token=${resetToken}`;
+        await transporter.sendMail({
+            to: email,
+            subject: 'Resetification',
+            text: `${resetLink}`
+        });
+
+        res.status(200).json({ message: 'Check YOUR Email FOR Recovery' });
+    } catch (error) {
+        console.error('Recovery Error:', error);
+        res.status(500).json({ error: 'Server Error' });
+    }
+}
+
+// Reset Password
+const resetPassword = async (req, res) => {
+    const { token, newPassword } = req.body;
+
+    try {
+        const user = await User.findOne({
+            resetToken: token,
+            resetExpiry: { $gt: Date.now() }
+        });
+
+        if (!user) {
+            return res.status(400).json({ error: 'Invalid Token' });
+        }
+
+        user.password = newPassword;
+        user.resetToken = null;
+        user.resetExpiry = null;
+        await user.save();
+
+        await user.save();
+
+        res.status(200).json({ message: 'Password Resetted' });
+    } catch (error) {
+        console.error('Reset Password Error:', error);
+        res.status(500).json({ error: 'Server Error' });
+    }
+};
+
+module.exports = { register, verifyEmail, login, logout, existence, verifyToken, profile, forgotPassword, resetPassword };

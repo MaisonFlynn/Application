@@ -94,8 +94,10 @@ async function register(event) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password })
     });
-    const data = await response.json; // Parse JSON Response
+
+    const data = await response.json();
     console.log('Register Response:', data);
+    
     if (response.ok) {
         document.getElementById('registerSuccess').textContent = 'Verification Email SENT';
     } else if (response.status === 500 && data.error === 'Email NOT Sent') {
@@ -171,4 +173,8 @@ const params = new URLSearchParams(window.location.search);
 const token = params.get('token');
 if (token) {
     verifyEmail(token);
+}
+
+function forgot() {
+    window.location.href = 'Pages/forgot.html'
 }
