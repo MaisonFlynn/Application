@@ -14,3 +14,7 @@ USER= Gmail Address
 PASS= Gmail Password || App Password
 PORT= Default 3000
 ```
+
+```bash
+npm run dev
+```
