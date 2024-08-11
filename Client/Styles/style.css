@@ -20,6 +20,8 @@ html {
     align-items: center;
     min-width: 1310px;
     min-height: 80px;
+    font-size: large;
+    padding-left: 10px;
 }
 
 .nav p {
