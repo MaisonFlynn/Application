@@ -101,16 +101,6 @@
     transform: scale(1.00);
 }
 
-.card img {
-    width: 100%;
-    height: 100%;
-    /* Placeholder */
-    transform: scale(1.5);
-    display: block;
-    object-fit: cover;
-    object-position: center;
-}
-
 .effect {
     position: absolute;
     width: 930px;
