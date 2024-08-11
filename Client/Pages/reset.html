@@ -67,9 +67,11 @@
             const urlParams = new URLSearchParams(window.location.search);
             const token = urlParams.get('token');
             const newPassword = document.getElementById('newPassword').value;
+            const messageElement = document.getElementById('message');
 
             if (!validatePassword(newPassword) || !sanitize(newPassword)) {
-                document.getElementById('message').textContent = 'Invalid Password';
+                messageElement.textContent = 'Invalid Password';
+                messageElement.style.color = 'red';
                 return;
             }
 
@@ -81,15 +83,20 @@
                 });
 
                 const data = await response.json();
-                document.getElementById('message').textContent = data.message || data.error;
-
                 if (response.ok) {
-                    document.getElementById('message').textContent = 'Success';
-                    window.location.href = '../index.html';
+                    messageElement.textContent = 'Success';
+                    messageElement.style.color = 'green';
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 1500);
+                } else {
+                    messageElement.textContent = data.message || data.error;
+                    messageElement.style.color = 'red';
                 }
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('message').textContent = 'Error';
+                messageElement.textContent = 'Error';
+                messageElement.style.color = 'red';
             }
         });
     </script>

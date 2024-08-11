@@ -55,9 +55,11 @@
         document.getElementById('forgot').addEventListener('submit', async function(event) {
             event.preventDefault();
             const email = document.getElementById('email').value;
+            const messageElement = document.getElementById('message');
 
             if (!validateEmail(email) || !sanitize(email)) {
-                document.getElementById('message').textContent = 'Invalid Email';
+                messageElement.textContent = 'Invalid Email';
+                messageElement.style.color = 'red';
                 return;
             }
 
@@ -67,19 +69,22 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email })
                 });
-        
-                const data = await response.json();
-                document.getElementById('message').textContent = data.message || data.error;
 
-                // Clear Input IF Successful
+                const data = await response.json();
                 if (response.ok) {
+                    messageElement.textContent = data.message || 'Email sent successfully';
+                    messageElement.style.color = 'green';
                     document.getElementById('email').value = '';
+                } else {
+                    messageElement.textContent = data.message || data.error;
+                    messageElement.style.color = 'red';
                 }
-                
             } catch (error) {
                 console.error('Error:', error);
+                messageElement.textContent = 'Error';
+                messageElement.style.color = 'red';
             }
         });
-        </script>
+    </script>
 </body>
 </html>
