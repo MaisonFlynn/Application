@@ -81,7 +81,7 @@ exports.gander = async (req, res) => {
                 result.push({ letter: guess[i], status: 'present' }); // Correct Letter, Wrong Position
                 yessir = false;
             } else {
-                result.push({ letter: guess[i], status: 'abscent' }); // Incorrect Letter
+                result.push({ letter: guess[i], status: 'absent' }); // Incorrect Letter
                 yessir = false;
             }
         }

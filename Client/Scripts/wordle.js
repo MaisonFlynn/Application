@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const value = guess.value.trim().toLowerCase();
         if (value.length !== 5) {
-            message.textContent = '$5 Footlong';
+            message.textContent = 'NOT Big Enough ಠ‿↼';
             return;
         }
 
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             count++;
 
             if (data.result.every(letter => letter.status === 'correct')) {
-                message.textContent = "+ 5 🪙's";
+                message.textContent = "+5🪙";
                 message.classList.add('win');
                 disable();
             } else if (count >= cap) {
