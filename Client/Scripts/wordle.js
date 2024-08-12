@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     draw(); 
 
+    // Sanitization
+    guess.addEventListener('input', function() {
+        this.value = this.value.replace(/[^a-zA-Z]/g, ''); // ONLY Letter(s)
+    });
+
     try {
         const sessionToken = localStorage.getItem('sessionToken');
         if (!sessionToken) {
