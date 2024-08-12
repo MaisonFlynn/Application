@@ -139,7 +139,7 @@ p {
 button {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -6px 0px inset;
     color: #FFFFFF;
-    background-color: #F92F60;
+    background-color: #E24A3F;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
