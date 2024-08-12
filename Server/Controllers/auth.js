@@ -44,7 +44,7 @@ const register = async (req, res) => {
         const verificationLink = `http://localhost:3000/index.html?token=${token}`;
         transporter.sendMail({
             to: email,
-            subject: 'Email Verification',
+            subject: 'Verification',
             text: `${verificationLink}`
         }, async (err, info) => {
             if (err) {
@@ -53,7 +53,7 @@ const register = async (req, res) => {
                 try {
                     await transporter.sendMail({
                         to: email,
-                        subject: 'Email Verification',
+                        subject: 'Verification',
                         text: `${verificationLink}`
                     });
                 } catch (error) {
