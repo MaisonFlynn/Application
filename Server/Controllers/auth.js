@@ -31,14 +31,11 @@ const register = async (req, res) => {
         // Generate Verification Token
         const token = crypto.randomBytes(32).toString('hex');
 
-        // Hash Password BEFORE Saving User
-        const hashedPassword = await bcrypt.hash(password, 10);
-
         // Create & Save User w/ Verification Token
         const user = new User({
             username,
             email,
-            password: hashedPassword,
+            password,
             verificationToken: token,
             registered: new Date()
         });
@@ -69,7 +66,7 @@ const register = async (req, res) => {
             }
         });
 
-        res.status(201).json({ message: 'Registration Successful! Check YOUR Email FOR Verification.' });
+        res.status(201).json({ message: 'Check YOUR Email FOR Verification.' });
     } catch (error) {
         console.error('Registration Error:', error);
         res.status(500).json({ error: 'Registraion Error, Please TRY Again' });
