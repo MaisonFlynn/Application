@@ -84,3 +84,15 @@ form {
     text-decoration: underline;
     color: blue;
 }
+
+button {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -6px 0px inset;
+    color: #FFFFFF;
+    background-color: #3F79E2;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+button:active {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px, rgba(0, 0, 0, 0.2) 0px 4px 4px -2px;
+    transform: translateY(2px);
+}
