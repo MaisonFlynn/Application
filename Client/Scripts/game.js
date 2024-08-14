@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const userData = await userResponse.json();
                 if (userResponse.ok) {
                     document.getElementById('username').textContent = userData.user.username;
-                    document.getElementById('coins').textContent = `🪙 ${userData.user.coins}`;
+                    document.getElementById('coins').textContent = `${userData.user.coins}🪙`;
                 } else {
                     console.error('Profile Error', userData.error);
                 }

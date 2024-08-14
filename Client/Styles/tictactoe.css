@@ -34,13 +34,13 @@
     background-color: #FFFFFF;
 }
 
-input {
+.container input {
     font-size: 18px;
     width: 189px;
     margin-right: 5px;
 }
 
-span {
+.container span {
     font-size: 18px;
 }
 

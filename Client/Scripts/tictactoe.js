@@ -1,10 +1,18 @@
-const socket = io('http://localhost:3000'); // Connect TO Server
+// Connect TO Server w/ Token
+const socket = io('http://localhost:3000', { query: `token=${localStorage.getItem('sessionToken')}` });
+
+console.log(io); // Should log the io object from socket.io-client
+
+socket.on('connect', () => {
+    console.log('Socket Connected!');
+});
+
+socket.on('disconnect', () => {
+    console.log('Socket Disconnected!');
+});
 
 function start() {
-    // Hide Lobby
     document.getElementById('lobby').style.display = 'none';
-    
-    // Show Game
     document.getElementById('game').style.display = 'block';
     document.getElementById('knobs').style.display = 'none';
 }
@@ -14,7 +22,7 @@ function random() {
     
     // Temporary Simulation
     setTimeout(() => {
-        startGame();
+        start();
         document.getElementById('msg').textContent = "Found!";
     }, 2000);
 }
@@ -22,15 +30,14 @@ function random() {
 function friend() {
     const code = Math.random().toString(36).substring(2, 8).toUpperCase();
     document.getElementById('invite').value = code;
-
     document.getElementById('tote').style.display = 'block';
     document.getElementById('msg').textContent = "Share Code w/ Friend!";
-
     socket.emit('create', code);
 }
 
 function join() {
     const code = document.getElementById('join').value.toUpperCase();
+    console.log('Joining w/', code);
     socket.emit('join', code);
 }
 
@@ -42,6 +49,7 @@ function copy() {
 }
 
 socket.on('start', (game) => {
+    console.log('Game Started!', game);
     start();
     initialize(game);
 });
@@ -50,24 +58,28 @@ socket.on('update', (board) => {
     update(board);
 });
 
+socket.on('usernames', (usernames) => {
+    console.log('Usernames!', usernames);
+    document.getElementById('one').textContent = usernames[socket.id] || "Player 1";
+    const opponent = Object.keys(usernames).find(id => id !== socket.id);
+    document.getElementById('two').textContent = usernames[opponent] || "Player 2";
+});
+
 function move(index) {
-    const Player = "X"; 
-    const Code = document.getElementById('invite').value || document.getElementById('join').value;
+    const player = "X"; 
+    const code = document.getElementById('invite').value || document.getElementById('join').value;
     
     socket.emit('move', {
-        code: Code,
+        code: code,
         index: index,
-        player: Player
+        player: player
     });
     
     check(); // Check IF Game Over
 }
 
 function initialize(game) {
-    // Choose X & O
-    document.getElementById('one').textContent = game.players[0];
-    document.getElementById('two').textContent = game.players[1];
-    updateBoard(game.board);
+    update(game.board);
 }
 
 function update(board) {
@@ -77,8 +89,6 @@ function update(board) {
 }
 
 function check() {
-    // Temporary Simulation
-
     const board = Array.from(document.getElementsByClassName('cell')).map(cell => cell.textContent);
     const win = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // Row(s)
