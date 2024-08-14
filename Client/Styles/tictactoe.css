@@ -27,15 +27,8 @@
     color: #000000;
 }
 
-#scrap {
-    margin-top: 20px;
-    font-size: 18px;
-    width: 270px;
-    background-color: #FFFFFF;
-    color: #000000;
-}
-
-.copy button {
+.copy button, .join button{
+    width: 72px;
     font-size: 18px;
     color: #000000;
     background-color: #FFFFFF;
@@ -126,14 +119,14 @@ span {
     transform: scale(0.95);
 }
 
-#controls button {
+#knobs button {
     font-size: 18px;
     color: #000000;
     background-color: #FFFFFF;
     width: 270px;
 }
 
-#controls {
+#knobs {
     display: flex;
     flex-direction: row;
     justify-content: center;

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../../Styles/home.css">
     <link rel="stylesheet" href="../../Styles/tictactoe.css">
     <script src="../../Scripts/theme.js"></script>
+    <!-- Socket IO CDN -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -42,22 +44,25 @@
         <!-- Game -->
         <div class="container" id="container">
             <!-- Lobby -->
-            <div id="lobby" class="lobby" style="display: none;">
+            <div id="lobby" class="lobby">
                 <h1>Tic Tac Toe</h1>
                 <button id="random" onclick="random()">Random</button>
                 <button id="friend" onclick="friend()">Friend</button>
-                <div id="tote">
+                <div id="tote" style="display: none;">
                     <div class="copy">
                         <input type="text" id="invite" readonly>
                         <button onclick="copy()">Copy</button>
                     </div>
-                    <button id="scrap" onclick="scrap()">Cancel</button>
+                </div>
+                <div class="join">
+                    <input type="text" id="join" placeholder="Join Code" />
+                    <button onclick="join()">Join</button>
                 </div>
                 <span id="msg"></span>
             </div>
 
             <!-- ACTUAL Game -->
-            <div id="game" class="game">
+            <div id="game" class="game" style="display: none;">
                 <!-- Player Information -->
                 <div id="information">
                     <!-- Player "X" -->
@@ -92,7 +97,7 @@
                     <div class="cell" id="8" onclick="move(8)"></div>
                 </div>
 
-                <div id="controls">
+                <div id="knobs" style="display: none;">
                     <button onclick="replay()">Replay</button>
                     <button onclick="leave()">NO Way</button>
                 </div>
