@@ -42,18 +42,60 @@
         <!-- Game -->
         <div class="container" id="container">
             <!-- Lobby -->
-            <div id="lobby" class="lobby">
+            <div id="lobby" class="lobby" style="display: none;">
                 <h1>Tic Tac Toe</h1>
                 <button id="random" onclick="random()">Random</button>
                 <button id="friend" onclick="friend()">Friend</button>
-                <div id="tote" style="display: none;">
+                <div id="tote">
                     <div class="copy">
                         <input type="text" id="invite" readonly>
                         <button onclick="copy()">Copy</button>
                     </div>
                     <button id="scrap" onclick="scrap()">Cancel</button>
                 </div>
-                <p id="msg"></p>
+                <span id="msg"></span>
+            </div>
+
+            <!-- ACTUAL Game -->
+            <div id="game" class="game">
+                <!-- Player Information -->
+                <div id="information">
+                    <!-- Player "X" -->
+                    <div id="x">
+                        <h1>X</h1>
+                        <span id="one">Username</span>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div id="statistics">
+                        <span id="time">60</span>
+                        <span id="status">Placeholder</span>
+                    </div>
+
+                    <!-- Player "O" -->
+                    <div id="o">
+                        <h1>O</h1>
+                        <span id="two">Username</span>
+                    </div>
+                </div>
+
+                <!-- Board -->
+                <div id="playground" class="playground">
+                    <div class="cell" id="0" onclick="move(0)"></div>
+                    <div class="cell" id="1" onclick="move(1)"></div>
+                    <div class="cell" id="2" onclick="move(2)"></div>
+                    <div class="cell" id="3" onclick="move(3)"></div>
+                    <div class="cell" id="4" onclick="move(4)"></div>
+                    <div class="cell" id="5" onclick="move(5)"></div>
+                    <div class="cell" id="6" onclick="move(6)"></div>
+                    <div class="cell" id="7" onclick="move(7)"></div>
+                    <div class="cell" id="8" onclick="move(8)"></div>
+                </div>
+
+                <div id="controls">
+                    <button onclick="replay()">Replay</button>
+                    <button onclick="leave()">NO Way</button>
+                </div>
             </div>
         </div>
 

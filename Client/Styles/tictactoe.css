@@ -10,6 +10,7 @@
 .container {
     padding: 0;
     padding-top: 20px;
+    overflow: none;
 }
 
 #random {
@@ -44,4 +45,98 @@ input {
     font-size: 18px;
     width: 189px;
     margin-right: 5px;
+}
+
+span {
+    font-size: 18px;
+}
+
+#information {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#o, #x {
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    max-width: 150px;
+    min-width: 150px;
+    overflow: none;
+}
+
+#x {
+    transform: perspective(4000px) rotateX(10deg) rotateY(10deg);
+}
+
+#o {
+    transform: perspective(4000px) rotateX(10deg) rotateY(-10deg);
+}
+
+#statistics {
+    color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    max-width: 400px;
+    min-width: 400px;
+    overflow: none;
+}
+
+#time {
+    font-size: 32px;
+}
+
+.playground {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 335px;
+    height: 335px;
+    margin: 30px auto;
+}
+
+.cell {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.cell:hover {
+    transform: perspective(4000px) rotateX(10deg) rotateY(10deg);
+}
+
+.cell:active {
+    transform: scale(0.95);
+}
+
+#controls button {
+    font-size: 18px;
+    color: #000000;
+    background-color: #FFFFFF;
+    width: 270px;
+}
+
+#controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
