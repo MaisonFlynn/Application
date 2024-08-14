@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="../../Styles/style.css">
+    <link rel="stylesheet" href="../../Styles/home.css">
+    <link rel="stylesheet" href="../../Styles/tictactoe.css">
+    <script src="../../Scripts/theme.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav">
+        <p onclick="home()">Home</p>
+        <p onclick="shop()">Shop</p>
+        <p id="username" onclick="profile()">Username</p>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+        
+    <!-- Profile -->
+    <div id="profile" class="profile">
+        <span id="close" onclick="profile()">❌</span>
+        <h2 id="coins">0🪙</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Logout -->
+    <div class="confirmation" id="confirmation">
+        <h1>Logout?</h1>
+        <button id="confirm">YES</button>
+        <button id="cancel">NO</button>
+    </div>
+
+    <div class="main">
+        <!-- Advertisement -->
+        <div class="ad">
+            Advertisement
+        </div>
+        
+        <!-- Game -->
+        <div class="container" id="container">
+            <!-- Lobby -->
+            <div id="lobby" class="lobby">
+                <h1>Tic Tac Toe</h1>
+                <button id="random" onclick="random()">Random</button>
+                <button id="friend" onclick="friend()">Friend</button>
+                <div id="tote" style="display: none;">
+                    <div class="copy">
+                        <input type="text" id="invite" readonly>
+                        <button onclick="copy()">Copy</button>
+                    </div>
+                    <button id="scrap" onclick="scrap()">Cancel</button>
+                </div>
+                <p id="msg"></p>
+            </div>
+        </div>
+
+        <!-- Advertisement -->
+        <div class="ad">
+            Advertisement
+        </div>
+    </div>
+
+    <!-- Script(s) -->
+    <script src="../../Scripts/game.js"></script>
+    <script src="../../Scripts/tictactoe.js"></script>
+</body>
+</html>

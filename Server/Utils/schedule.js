@@ -12,7 +12,7 @@ cron.schedule('0 0 * * *', async () => {
             verified: false,
             registered: { $lt: expiration }
         });
-        console.log(`Deleted ${result.deletedCount} NON Verified User(s)`);
+        console.log(`Deleted ${result.deletedCount || 0} NON Verified User(s)`);
     } catch (error) {
         console.error('Schedule Error', error);
     }
@@ -28,7 +28,7 @@ cron.schedule('0 0 * * *', async () => {
             { session: { $lt: expiration } },
             { $unset: { sessionToken: "", session: "" } }
         );
-        console.log(`Deleted ${result.nModified} Session(s)`);
+        console.log(`Deleted ${result.nModified || 0} Session(s)`);
     } catch (error) {
         console.error('Schedule Error', error);
     }
@@ -42,14 +42,14 @@ cron.schedule('0 0 * * *', async () => {
         const rando = nab();
         const crisp = new Wordle({ word: rando, date: today });
         await crisp.save();
-        console.log(`New Word of the Day is "${crisp}"`);
+        console.log(`New Word of the Day is "${rando}"`);
 
         // Clear User's Wordle Data
         const result = await User.updateMany(
             {},
             { $set: { guesses: [], attempts: null, solved: null, played: null } }
         );
-        console.log(`Wordled ${result.nModified} User(s)`);
+        console.log(`Wordled ${result.nModified || 0} User(s)`);
     } catch (error) {
         console.error('Wordle Hurdle XD', error);
     }

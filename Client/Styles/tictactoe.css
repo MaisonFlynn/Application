@@ -1,0 +1,47 @@
+.lobby {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.container {
+    padding: 0;
+    padding-top: 20px;
+}
+
+#random {
+    font-size: 18px;
+    width: 270px;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+#friend {
+    font-size: 18px;
+    width: 270px;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+#scrap {
+    margin-top: 20px;
+    font-size: 18px;
+    width: 270px;
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.copy button {
+    font-size: 18px;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+
+input {
+    font-size: 18px;
+    width: 189px;
+    margin-right: 5px;
+}
