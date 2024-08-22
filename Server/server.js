@@ -5,8 +5,6 @@ const cors = require('cors');
 const path = require('path');
 const User = require('./Models/User');
 const Wordle = require('./Models/Wordle');
-const http = require('http');
-const socketIO = require('socket.io');
 
 dotenv.config();
 
@@ -81,66 +79,6 @@ app.use('/wordle', wordle);
 
 // Load Schedule
 require('./Utils/schedule');
-
-// Work IN Progress
-// SocketIO Setup
-const server = http.createServer(app);
-const io = socketIO(server);
-
-let games = {}; // Store Active Game(s) w/ Code(s)
-
-io.on('connection', (socket) => {
-    console.log('User Connected!', socket.id);
-
-    socket.on('create', async (code) => {
-        // Find User BY Session Token 
-        const user = await User.findOne({ sessionToken: socket.handshake.query.token });
-
-        if (user) {
-            games[code] = { players: [socket.id], board: Array(9).fill(null), usernames: {} };
-            games[code].usernames[socket.id] = user.username;
-            socket.join(code);
-            console.log(`${user.username} Started w/ ${code}`);
-        }
-    });
-
-    socket.on('join', async (code) => {
-        console.log(`Attempting TO Join w/ ${code}`);
-        const user = await User.findOne({ sessionToken: socket.handshake.query.token });
-        console.log('User Found!', user.username);
-    
-        if (user && games[code]) {
-            console.log('Game Found!', games[code]);
-            if (games[code].players.length < 2) {
-                games[code].players.push(socket.id);
-                games[code].usernames[socket.id] = user.username;
-                socket.join(code);
-                io.to(code).emit('start', games[code]);
-                io.to(code).emit('usernames', games[code].usernames);
-                console.log(`${user.username} Joined w/ ${code}`);
-            } else {
-                console.log('Game FULL');
-                socket.emit('error', 'Game FULL');
-            }
-        } else {
-            console.log('Invalid Code OR User');
-            socket.emit('error', 'Invalid Code OR User');
-        }
-    });    
-
-    socket.on('move', (data) => {
-        const { code, index, player } = data;
-        if (games[code]) {
-            games[code].board[index] = player;
-            io.to(code).emit('update', games[code].board);
-        }
-    });
-
-    socket.on('disconnect', () => {
-        console.log('User Disconnected!', socket.id);
-        // Disconnection, Clean UP, Notifications
-    });
-});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

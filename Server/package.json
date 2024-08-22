@@ -22,7 +22,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.2",
     "node-cron": "^3.0.3",
-    "nodemailer": "^6.9.14",
-    "socket.io": "^4.7.5"
+    "nodemailer": "^6.9.14"
   }
 }
