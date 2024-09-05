@@ -1,12 +1,12 @@
 ## Demonstration <small>[YouTube]</small>
 
-[![Application](https://img.youtube.com/vi/YCA2Qj8-l-0/maxresdefault.jpg)](https://www.youtube.com/watch?v=YCA2Qj8-l-0)
+[![Authcade](https://img.youtube.com/vi/YCA2Qj8-l-0/maxresdefault.jpg)](https://www.youtube.com/watch?v=YCA2Qj8-l-0)
 
 ## Installation
 
 ```bash
-git clone https://github.com/MaisonFlynn/Application.git
-cd Application/Server
+git clone https://github.com/MaisonFlynn/Authcade.git
+cd Authcade/Server
 npm install
 touch .env
 ```
